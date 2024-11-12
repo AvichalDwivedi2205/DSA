@@ -9,8 +9,8 @@ void Shift(int arr[], int size, int shift){
         a[c] = arr[i];
         c++;
     }
-    for(int i=0;i<size-shift;i++){
-        a[c]=a[i];
+    for(int i=0;i<size-shiftNew;i++){
+        a[c]=arr[i];
         c++;
     }
     for(int i=0;i<size;i++){
