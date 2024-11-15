@@ -1,5 +1,9 @@
 #include <iostream>
 using namespace std;
+//The other approached in this would be to take another array and run loop 2 times to fill in all the negative
+//and the positive integers with n space and time complexity 
+//The other approach would be sorting with nlogn
+//This particular approach is the best approach
 
 void NegativeLeft(int a[], int size){
     int j=0;
