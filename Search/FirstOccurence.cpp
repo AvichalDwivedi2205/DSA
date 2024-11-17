@@ -1,30 +1,49 @@
-# include <iostream>
+#include <vector>
 using namespace std;
-
-int binarySearch(int *arr, int size, int ele){
-    int s=0,e=size-1,mid=s+(e-s)/2;
-    int index=-1;
-    while(e>=s){
-        if(arr[mid]==ele){
-            index=mid;
-            break;
+class Solution {
+public:
+    int firstOccurence(vector<int>& arr, int target){
+        int s=0,e=arr.size()-1,mid=s+(e-s)/2;
+        int ans=-1;
+        while(e>=s){
+            if(arr[mid]==target){
+                ans=mid;
+                e=mid-1;
+            }
+            if(arr[mid]>target){
+                e=mid-1;
+            }
+            if(arr[mid]<target){
+                s=mid+1;
+            }
+            mid=s+(e-s)/2;
         }
-        if(ele>arr[mid]){
-            s=mid+1;
-        }
-        if(ele<arr[mid]){
-            e=mid-1;
-        }
-        mid=s+(e-s)/2;
+        return ans;
     }
-    return index;
-}
 
-int main(){
-    int arr[] = {2,3,5,6,7,8,20,282,2828,389333};
-    int index=binarySearch(arr, 10, 21);
-    if(index>=0)
-    cout<<"Element found at index: "<<index;
-    else
-    cout<<"Element Not Found";
-}
+    int LastOccurence(vector<int>& arr, int target){
+        int s=0,e=arr.size()-1,mid=s+(e-s)/2;
+        int ans=-1;
+        while(e>=s){
+            if(arr[mid]==target){
+                ans=mid;
+                s=mid+1;
+            }
+            if(arr[mid]>target){
+                e=mid-1;
+            }
+            if(arr[mid]<target){
+                s=mid+1;
+            }
+            mid=s+(e-s)/2;
+        }
+        return ans;
+    }
+
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> answers;
+        answers.push_back(firstOccurence(nums, target));
+        answers.push_back(LastOccurence(nums, target));
+        return answers;
+    }
+};
