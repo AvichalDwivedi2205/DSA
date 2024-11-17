@@ -39,11 +39,15 @@ public:
         }
         return ans;
     }
+    int totalOccurence(int first, int last){
+        return last-first+1;
+    }
 
     vector<int> searchRange(vector<int>& nums, int target) {
         vector<int> answers;
         answers.push_back(firstOccurence(nums, target));
         answers.push_back(LastOccurence(nums, target));
+        int total = totalOccurence(answers[0], answers[1]);
         return answers;
     }
 };
