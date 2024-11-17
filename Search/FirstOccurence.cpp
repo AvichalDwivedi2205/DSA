@@ -22,7 +22,7 @@ int binarySearch(int *arr, int size, int ele){
 
 int main(){
     int arr[] = {2,3,5,6,7,8,20,282,2828,389333};
-    int index=binarySearch(arr, 10, 20);
+    int index=binarySearch(arr, 10, 21);
     if(index>=0)
     cout<<"Element found at index: "<<index;
     else
