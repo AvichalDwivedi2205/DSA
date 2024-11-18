@@ -12,7 +12,6 @@ int MissingElement(int *arr, int size){
             e=mid-1;
             index=min(index,mid);
         }
-        
         mid=s+(e-s)/2;
     }
     return index;
