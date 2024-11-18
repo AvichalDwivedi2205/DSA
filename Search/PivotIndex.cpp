@@ -25,8 +25,8 @@ int PivotIndex(int *arr, int size){
 }
 
 int main(){
-    int arr[] = {12,14,16,18,20,2,3,6,8,9};
-    int index=PivotIndex(arr, 10);
+    int arr[] = {1};
+    int index=PivotIndex(arr, 1);
     if(index>=0)
     cout<<"Pivot Index is: "<<index;
     else
