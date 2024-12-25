@@ -11,6 +11,16 @@ struct ListNode {
  
 class Solution {
 public:
+    //Recursive Approach
+    ListNode* reverseRecursionList(ListNode* prev, ListNode* curr){
+        if(curr==NULL){
+            return prev;
+        }
+        ListNode* nextNode=curr->next;
+        curr->next=prev;
+        return reverseRecursionList(curr, nextNode);
+    }
+    //Iterative Approach
     ListNode* reverseList(ListNode* head) {
         ListNode* currNode = head;
         ListNode* prevNode=NULL;
