@@ -11,6 +11,17 @@ struct ListNode {
 
 class Solution {
 public:
+
+    ListNode* LeftmiddleNode(ListNode* head) {
+        ListNode* temp=head;
+        ListNode* middle=head;
+        while(temp->next!=NULL && (temp->next)->next!=NULL){
+            middle=middle->next;
+            temp=(temp->next)->next;
+        }
+        return middle;
+    }
+
     ListNode* middleNode(ListNode* head) {
         ListNode* temp=head;
         ListNode* middle=head;
