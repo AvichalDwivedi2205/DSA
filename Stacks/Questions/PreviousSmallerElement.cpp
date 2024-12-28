@@ -5,7 +5,7 @@ using namespace std;
 
 class Solution {
   public:
-    vector<int> immediateSmaller(vector<int>& arr) {
+    vector<int> PreviousSmaller(vector<int>& arr) {
         //  code here
         stack <int> st;
         vector<int> ans(arr.size());
