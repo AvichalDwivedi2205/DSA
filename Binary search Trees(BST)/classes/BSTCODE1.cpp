@@ -204,6 +204,24 @@ Node* deleteFromBST(Node* root, int target) {
 	return root;
 }
 
+Node* bstFromInorder(int inorder[], int s, int e){
+	//Base Case
+	if(s>e){
+		return NULL;
+	}
+
+	//1 Case Solve Karna Hai
+	int mid=s+(e-s)/2;
+	int ele = inorder[mid];
+	Node* root = new Node(ele);
+
+	//Baaaaaaaki Recursion
+	root->left = bstFromInorder(inorder, s, mid-1);
+	root->right = bstFromInorder(inorder, mid+1,e);
+
+	return root;
+}
+
 int main() {
 
 	Node* root = NULL;
