@@ -191,6 +191,38 @@ Node* deleteFromBST(Node* root, int target){
     return root;
 }
 
+// COnvert BST into sorted Doubly LL
+void convertBSTToDLL(Node* root, Node* head){
+    if(root==NULL){
+        return;
+    }
+
+    //RNL
+    //R
+    convertBSTToDLL(root->right, head);
+    // attch root node (N)
+    root->right=head;
+    if(head!=NULL)
+    head->left=root;
+    head=root;
+    //L
+    convertBSTToDLL(root->left, head);
+}
+
+Node* sortedDLLintoBST(Node* &head, int n){
+    // base case
+    if(n<=0 || head==NULL){
+        return NULL;
+    }
+    Node* root=head;
+    Node* leftSubTree = sortedDLLintoBST(head, n-1-n/2);
+    root->left = leftSubTree;
+    head=head->right;
+    //Right Part Solve Karna Hai
+    root->right=sortedDLLintoBST(head, n/2);
+    return root;
+}
+
 int main() {
     Node* root = NULL;
     createBST(root);
