@@ -41,7 +41,7 @@ public:
         // We will us ethe approach of range in this case
         // For example let us say that the root node is 7 then the range of the element left to it would be
         // (7,inf) and taht of left would be (-inf, 7)
-        // There owuld be anothe rcase in this though
+        // There owuld be another case in this though
         // Let us say 5 is an element in the left of a BST. The in that case the right of it would have a range
         // (5, the node just before that) and left would have a range of (-inf, 5)
         // The right subtree case would just be reversed in this case.
