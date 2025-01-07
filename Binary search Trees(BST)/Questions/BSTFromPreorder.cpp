@@ -20,7 +20,9 @@ public:
         }
         TreeNode* root=nullptr;
         if(preorder[i]>min && preorder[i]<max){
-            root=new TreeNode(preorder[i++]);
+            root=new TreeNode(preorder[i]);
+            i++;
+            //The above 2 lines is same as root=new TreeNode(preorder[i++]);
             root->left=build(min,root->val,i, preorder);
             root->right=build(root->val, max, i, preorder);
         }
