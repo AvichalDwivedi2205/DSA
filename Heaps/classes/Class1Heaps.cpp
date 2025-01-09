@@ -23,8 +23,9 @@ class Heap{
                 int index=size;
                 arr[index]=val;
                 // Take the value to its current position
-                while(index>1){
-                    int parInd=index/2;
+                int parInd=index;
+                while(parInd>1){
+                    parInd=index/2;
                     if(arr[index]>arr[parInd]){
                         swap(arr[index], arr[parInd]);
                         parInd=index;
@@ -76,7 +77,24 @@ class Heap{
         }  
 };
 
-void heapify(int *arr, int size, int index){
+//This is bottom up heapification approach
+void heapifyForInsertion(int *arr, int n, int i){
+    int parent = i / 2;
+    if (parent >= 0) { 
+        // For Max-Heap 
+        // If current node is greater than its parent 
+        // Swap both of them and call heapify again 
+        // for the parent 
+        if (arr[i] > arr[parent]) { 
+            swap(arr[i], arr[parent]); 
+            // Recursively heapify the parent node 
+            heapifyForInsertion(arr, n, parent); 
+        } 
+    } 
+}
+
+//This is top bottom heapification approach
+void heapifyForDeletion(int *arr, int size, int index){
     int leftIndex=2*index;
     int rightIndex=2*index+1;
     int largestIndex=index;
@@ -90,7 +108,7 @@ void heapify(int *arr, int size, int index){
         swap(arr[index], arr[largestIndex]);
         //Ab Recursion Sambhalega
         index=largestIndex;
-        heapify(arr, size, index);
+        heapifyForDeletion(arr, size, index);
     }
     //Here there is no need of base case as when the code has index==largestIndex then the code will automatically stop
     //So there is no need of any base case
@@ -98,7 +116,7 @@ void heapify(int *arr, int size, int index){
 
 void arrayToHeap(int arr[], int size){
     for(int i=size/2; i>0; i--){
-        heapify(arr, size, i);
+        heapifyForDeletion(arr, size, i);
     }
     //Since all the nodes form n/2 to n are leaf nodes so we do not need to use heapify in this case
     //The time complexity is O(n) and not O(nlogn)
@@ -109,37 +127,40 @@ void HeapSort(int arr[], int n){
         swap(arr[1], arr[n]);
         //Here it is 1 based indexing so we will have index starting from n so we will have to use n and not n-1
         n--;
-        heapify(arr,n,1);
+        heapifyForDeletion(arr,n,1);
     }
 }
 
 int main(){
 
-    int arr[] = {-1,5,10,15,20,25,12};
+    int arr[] = {-1,50,60,100,30,40,20,175};
     //We are putting index as -1 in the start because we are starting index from 1
-    int n = 6;
-    arrayToHeap(arr,6);
+    int n = 7;
+    arrayToHeap(arr,7);
     
     cout << "printing heap: " << endl;
-    for(int i=1; i<=6; i++) {
+    for(int i=1; i<=7; i++) {
         cout << arr[i] << " ";
     }
     cout << endl;
 
     HeapSort(arr, n);
     cout << "printing heap: " << endl;
-    for(int i=1; i<=6; i++) {
+    for(int i=1; i<=7; i++) {
     cout << arr[i] << " ";
     }
+    cout << endl;
     cout << endl;
 
     Heap h(20);
     //inserting
+    h.insert(100);
+    h.insert(50);
+    h.insert(60);
+    h.insert(40);
+    h.insert(30);
     h.insert(20);
-    h.insert(10);
-    h.insert(5);
-    h.insert(11);
-    h.insert(6);
+    h.insert(175);
     h.printHeap();
     int answer=h.deleteFromHeap();
     cout<<"answer"<<endl;
