@@ -50,7 +50,7 @@ class info{
      int maxVal;
      bool isHeap;
      info(){
-        
+
      }
      info(int a, bool b){
         this->maxVal=a;
@@ -85,6 +85,47 @@ info checkMaxHeap(Node* root){
         ans.isHeap=false;
         return ans;
     }
+}
+
+void inorder(Node* root, vector<int> &in){
+    if(root==NULL) return;
+    //LNR
+    inorder(root->left, in);
+    in.push_back(root->data);
+    inorder(root->right, in);
+}
+
+void levelOrder(Node* root, vector<int> in){
+    queue<Node*> q;
+    if(root==NULL) return;
+    q.push(root);
+    int i=in.size()-1;
+    while(!q.empty()){
+        auto ele=q.front();
+        ele->data=in[i--];
+        if(ele->left)
+        q.push(ele->left);
+        if(ele->right)
+        q.push(ele->right);
+    }
+}
+
+void postorder(Node* root, vector<int> &in, int &i){
+    if(root==NULL) return;
+    //LRN
+    postorder(root->left, in, i);
+    postorder(root->right, in, i);
+    root->data=in[i];
+}
+
+void BSTToMaxHeap(Node* root){
+    vector<int> in;
+    inorder(root, in);
+    //We can do it by 2 methods 
+    //Method 1 is by level order and replacing all the elments by the inorder
+    levelOrder(root, in);
+    // Another Method is by postorder that is replacing all the elements by inorder in post order traversal
+    // postorder(root, in)
 }
 
 int main(){
