@@ -62,10 +62,32 @@ public:
         return dp[0][0];
     }
 
+    int SpaceOptimizedRow(string &text1, string &text2){
+        vector<int> curr(text2.length()+1, 0);
+        vector<int> next(text2.length()+1, 0);
+        //Here we had to take text1.length() as we want no. of blocks in a column which is no. of rows
+        //We can also do it without changing the loop that is only if we come row wise
+        for(int i=text1.length()-1;i>=0;i--){
+            for(int j=text2.length()-1; j>=0;j--){
+                int ans=0;
+                if(text2[j]==text1[i]){
+                    ans=1+next[j+1];
+                }else{
+                    ans=0+max(curr[j+1], next[j]);
+                }
+                curr[j]=ans;
+            }
+            //shifting
+            next=curr;
+        }
+        return next[0];
+    }
+
     int SpaceOptimized(string &text1, string &text2){
         vector<int> curr(text1.length()+1, 0);
         vector<int> next(text1.length()+1, 0);
         //Here we had to take text1.length() as we want no. of blocks in a column which is no. of rows
+        //We can also do it without changing the loop that is only if we come row wise
         for(int j=text2.length()-1; j>=0;j--){
             for(int i=text1.length()-1;i>=0;i--){
                 int ans=0;
@@ -102,6 +124,6 @@ public:
 
     int longestCommonSubsequence(string text1, string text2) {
         // vector<vector<int>> dp(text1.length()+1, vector<int>(text2.length()+1,-1));
-        return SpaceOptimizedEvenMore(text1, text2);
+        return SpaceOptimizedRow(text1, text2);
     }
 };
