@@ -34,7 +34,7 @@ public:
 template<typename T>
 class GraphWeighted {
 public:
-    unordered_map<T, list<pair<T,T>>> adjList;
+    unordered_map<T, list<pair<T,int>>> adjList;
 
     void addEdge(T u, T v, int wt, bool direction) {
         // direction -> 0 -> undirected;
@@ -74,10 +74,10 @@ int main() {
     // g.printadjList();
 
     GraphWeighted<int> g;
-    g.addEdge(0, 1, 10, 1);
-    g.addEdge(1, 2, 20, 1);
-    g.addEdge(1, 3, 21, 1);
-    g.addEdge(2, 3, 17, 1);
+    g.addEdge(0, 1, 10, 0);
+    g.addEdge(1, 2, 20, 0);
+    g.addEdge(1, 3, 21, 0);
+    g.addEdge(2, 3, 17, 0);
 
     cout << "Printing Adj List:" << endl;
     g.printadjList();
