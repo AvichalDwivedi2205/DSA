@@ -75,6 +75,10 @@ class Graph{
             }
             // If topological sort size is equal to n then there will be no loops.
             // This is also known as Kahn's Algorithm
+            // Directed graph cycle
+            // This code will only be applicable if there is no cycle
+            // This could also be used to find cycle
+            // if ans.size()==adj.size() then no cycle else cycle will be present
         }
 };
 
