@@ -82,18 +82,50 @@ class Graph{
             // This will not work in a cyclic graph because there will be a case where a part of graph will be left unvisited
             // This is because the indegree of that node will never be zero
         }
+
+        void shortestPath(int src, int dest){
+            queue<int> q;
+            unordered_map<int, bool> visited;
+            unordered_map<int, int> parent;
+            
+            //initial state
+            q.push(src);
+            visited[src]=true;
+            parent[src]=-1;
+
+            while(!q.empty()){
+                int front = q.front();
+                for(auto nbr:adjList[front]){
+                    if(!visited[nbr]){
+                        q.push(nbr);
+                        visited[nbr]=true;
+                        parent[nbr]=front;
+                    }
+                }
+            }
+            // parent array is ready
+            vector<int> ans;
+            while(dest != -1){
+                ans.push_back(dest);
+                dest=parent[dest];
+            }
+            reverse(ans.begin(), ans.end());
+            for(auto i:ans){
+                cout<<i<<"->";
+            }   
+        }
 };
 
 int main(){ 
     Graph g;
-    g.addEdge(0,1,1);
-    g.addEdge(1,2,1);
-    g.addEdge(2,3,1);
-    g.addEdge(2,4,1);
-    g.addEdge(3,5,1);
-    g.addEdge(4,5,1);
-    g.addEdge(5,6,1);
-    g.addEdge(5,7,1);
+    g.addEdge(0,1,0);
+    g.addEdge(1,2,0);
+    g.addEdge(2,3,0);
+    g.addEdge(2,4,0);
+    g.addEdge(3,5,0);
+    g.addEdge(4,5,0);
+    g.addEdge(5,6,0);
+    g.addEdge(5,7,0);
     g.printAdjList();
     unordered_map<int, bool> vis;
     stack<int> st;
@@ -110,4 +142,7 @@ int main(){
     cout<<endl<<"Topological sort is ->"<<endl; 
     g.topSortBFS(8);
     return 0;
+
+    cout<<endl<<"Shortest Path is ->"<<endl;
+    g.shortestPath(0,6);
 }
