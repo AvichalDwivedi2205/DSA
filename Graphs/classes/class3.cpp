@@ -79,6 +79,8 @@ class Graph{
             // This code will only be applicable if there is no cycle
             // This could also be used to find cycle
             // if ans.size()==adj.size() then no cycle else cycle will be present
+            // This will not work in a cyclic graph because there will be a case where a part of graph will be left unvisited
+            // This is because the indegree of that node will never be zero
         }
 };
 
