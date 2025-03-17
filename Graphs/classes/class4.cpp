@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <limits>
+# include <set>
 
 using namespace std;
 
@@ -81,17 +82,53 @@ class Graph{
               cout<<i<<" ";
           }
        }
+
+       void dijkstra(int src, int n, int dest){
+           vector<int> dist(n, 823782);
+           set<pair<int,int>> st;
+
+           //Initial State
+           st.insert({0,src});
+           while(!st.empty()){
+            auto topEle = st.begin();
+            pair<int,int> topPair = *topEle;
+            int topDist = topPair.first;
+            int topNode = topPair.second;
+            st.erase(st.begin());
+            //update distance of neighbour
+            for(pair<int,int> nbr: adjList[topNode]){
+                int nbrNode=nbr.first;
+                int nbrDist=nbr.second;
+                if(topDist+nbrDist<dist[nbrNode]){
+                    //update set and distance array
+                    auto prev = st.find({dist[nbrNode], nbrNode});
+                    if(prev!=st.end()){
+                        st.erase(prev);
+                    }
+                    dist[nbrNode]=topDist+nbrDist;
+                    st.insert({dist[nbrNode], nbrNode});
+                }
+            }
+           }
+           cout<<"Printing the distance array"<<endl;
+           cout<<dist[dest]<<endl;
+           for(auto i:dist){
+               cout<<i<<" ";
+           }
+       }
 };
 
 int main(){
     Graph g;
-    g.addEdge(0,1,5,1);
-    g.addEdge(0,2,3,1);
-    g.addEdge(2,1,2,1);
-    g.addEdge(1,3,3,1);
-    g.addEdge(2,3,5,1);
-    g.addEdge(2,4,6,1);
-    g.addEdge(4,3,1,1);
+    g.addEdge(1,6,14,0);
+    g.addEdge(1,3,9,0);
+    g.addEdge(1,2,7,0);
+    g.addEdge(2,3,10,0);
+    g.addEdge(2,4,15,0);
+    g.addEdge(3,4,11,0);
+    g.addEdge(6,3,2,0);
+    g.addEdge(6,5,9,0);
+    g.addEdge(5,4,6,0);
     g.printAdjList();
 
     stack<int> topOrder;
@@ -100,6 +137,7 @@ int main(){
     g.topoOrderDfs(src, topOrder, visited);
     cout<<"Printing the distance array";
     g.shortestPathDFS(3,topOrder,5);
+    g.dijkstra(6,6,4);
 
     return 0;
 }
