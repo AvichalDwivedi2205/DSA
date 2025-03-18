@@ -1,5 +1,6 @@
 # include<vector>
 # include <unordered_map>
+# include <queue>
 # include <iostream>
 using namespace std;
 
@@ -71,3 +72,39 @@ public:
         return ans;
     }
 };
+
+class SolutionM3 {
+    public:
+        int numIslands(vector<vector<char>>& grid) {
+            int count=0;
+            int row=grid.size();
+            int col=grid[0].size();
+            int drow[]={0,1,0,-1};
+            int dcol[]={1,0,-1,0};
+            queue<pair<int,int>> q;
+            for(int i=0;i<row;i++){
+                for(int j=0;j<col;j++){
+                if(grid[i][j]=='1'){
+                    count++;
+                    q.push({i,j});
+                    while(!q.empty()){
+                        auto top = q.front();
+                        q.pop();
+                        int cr=top.first;
+                        int cc=top.second;
+                        grid[cr][cc]='X';
+                        for(int k=0;k<4;k++){
+                            int nr=cr+drow[k];
+                            int nc=cc+dcol[k];
+                            if(nr<row && nc<col && nr>=0 && nc>=0 && grid[nr][nc]!='0'&&grid[nr][nc]!='X'){
+                                grid[nr][nc]='X';
+                                q.push({nr,nc});
+                            }
+                        }
+                    }
+                }
+                }
+            }
+            return count;
+        }
+    };
