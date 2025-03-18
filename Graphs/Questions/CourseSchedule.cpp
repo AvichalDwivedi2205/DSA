@@ -6,8 +6,8 @@ using namespace std;
 
 class Solution {
     public:
-    
-        vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+        bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+            if (prerequisites.empty()) return true;
             vector<int> indegree(numCourses, 0);
             unordered_map<int, list<int>> adjList;
             for (auto& it : prerequisites) {
@@ -21,11 +21,11 @@ class Solution {
                     q.push(i);
                 }
             }
-            vector<int> ans;
+            int numCompleted = 0;
             while (!q.empty()) {
                 int ele = q.front();
                 q.pop();
-                ans.push_back(ele);
+                numCompleted++;
     
                 for (int neighbor : adjList[ele]) {
                     indegree[neighbor]--;
@@ -34,7 +34,7 @@ class Solution {
                     }
                 }
             }
-            return (ans.size()==numCourses)?ans:vector<int>{};
+            return numCompleted == numCourses;
         }
     };
     
