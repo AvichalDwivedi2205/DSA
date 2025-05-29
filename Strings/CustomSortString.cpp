@@ -1,20 +1,23 @@
 #include <string>
-using namespace std;
 #include <algorithm>
+using namespace std;
 
 class Solution {
 public:
+    // Static string to hold the custom order for comparison
     static string str;
-    static bool compare(char char1, char char2){
-        return (str.find(char1)<str.find(char2));
-        //This will return truw if position of char1 in str is less than position of char2 in str.
-        //When true is returned then the character 1 will be placed before character2 in sorting as well 
-    } 
 
+    // Comparator function to decide order of characters based on their position in 'str'
+    static bool compare(char char1, char char2) {
+        // Find positions of char1 and char2 in str
+        // Characters that appear earlier in str come first
+        return (str.find(char1) < str.find(char2));
+    }
+
+    // Function to sort string 's' according to custom order given in 'order'
     string customSortString(string order, string s) {
-        str=order;
-        sort (s.begin(), s.end(), compare);
-        return s;
+        str = order;                    // Assign the custom order to static string
+        sort(s.begin(), s.end(), compare);  // Sort string s using the custom comparator
+        return s;                      // Return the sorted string
     }
 };
-string Solution::str;
